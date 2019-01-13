@@ -1,5 +1,13 @@
 <div class="ui-g">
     <div class="ui-g-6">
-        <app-scrollable-menu></app-scrollable-menu>
+        <app-scrollable-menu 
+            [bankingOperations]="bankingOperations" 
+            [positive]="positive">
+        </app-scrollable-menu>
+    </div>
+    <div class="ui-g-6">
+        <app-bank-transaction-handling
+            [bankingOperations]="bankingOperations">
+        </app-bank-transaction-handling>
     </div>
 </div>

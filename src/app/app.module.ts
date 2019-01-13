@@ -41,6 +41,7 @@ import {HighlightDirective} from 'src/app/directives/highlight.directive';
 import { TableOfBankTransactionsComponent } from './components/table-of-bank-transactions/table-of-bank-transactions.component';
 import { ScrollableMenuComponent } from './components/scrollable-menu/scrollable-menu.component';
 import { TransactionCategorisationComponent } from './components/transaction-categorisation/transaction-categorisation.component';
+import { BankTransactionHandlingComponent } from './components/bank-transaction-handling/bank-transaction-handling.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { TransactionCategorisationComponent } from './components/transaction-cat
     HighlightDirective,
     TableOfBankTransactionsComponent,
     ScrollableMenuComponent,
-    TransactionCategorisationComponent
+    TransactionCategorisationComponent,
+    BankTransactionHandlingComponent
   ],
   imports: [
     FormsModule,
