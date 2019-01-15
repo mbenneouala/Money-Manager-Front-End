@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'primeng/components/common/message';
 import * as XLSX from 'ts-xlsx';
 import { Router } from '@angular/router';
@@ -20,18 +20,35 @@ export class ContainerComponent implements OnInit {
    */
   public bankingOperations: BankingOperations[];
   public bankTransactions$: Observable<BankingOperations[]> = this.apiBankingOperationsService.getBankingOperations();
-  positive: boolean;
+  public positive: boolean;
+  public stringToSplit: string;
+  public operationManagement: BankingOperations;
 
   constructor(private apiBankingOperationsService: ApiBankingOperationsService) { }
+
+  displayCounter(stringToSplit) {
+    this.stringToSplit = stringToSplit;
+    const lastSpaceCharacter = this.stringToSplit.split(' ');
+    const currentOperation: BankingOperations = {
+      bankingOperationValue: lastSpaceCharacter[(lastSpaceCharacter.length) - 1],
+      bankingOperationLabel: lastSpaceCharacter[(lastSpaceCharacter.length) - 1]
+    };
+    this.operationManagement = currentOperation;
+
+    // this.operationManagement.bankingOperationValue = lastSpaceCharacter[(lastSpaceCharacter.length) - 1];
+    // this.operationManagement.bankingOperationLabel = lastSpaceCharacter[(lastSpaceCharacter.length) - 1];
+    // this.operationManagement.bankingOperationDate = lastSpaceCharacter[(lastSpaceCharacter.length) - 2];
+    // this.operationManagement.bankingOperationCategory = lastSpaceCharacter[0];
+  }
 
   /**
   * Get bank transactions from REST API
   */
- public getBankingOperations(): void {
-  this.bankTransactions$.subscribe(data => {
-    this.bankingOperations = data;
-  });
-}
+  public getBankingOperations(): void {
+    this.bankTransactions$.subscribe(data => {
+      this.bankingOperations = data;
+    });
+  }
 
   /**
    * Set bank transaction color

@@ -2,7 +2,7 @@
 <div class="vertical-menu">
     <!-- <a href="#" class="active">Bank transactions</a> -->
     <div *ngFor="let operation of bankingOperations">
-      <a href="#" (click)="printToto($event)">{{ operation.bankingOperationLabel }} 
+      <a (click)="valueChanged($event)" href="#">{{ operation.bankingOperationLabel }} 
         <b style="float:right" [ngClass]="positive ? 'positive-value': 'negative-value'">{{ operation.bankingOperationValue }}</b>
       </a>
     </div>

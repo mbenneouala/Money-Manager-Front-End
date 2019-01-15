@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BankingOperations } from '../../models/bankingOperations';
 
 @Component({
@@ -12,8 +12,12 @@ export class BankTransactionHandlingComponent implements OnInit {
    *  Attributes
    */
   @Input() bankingOperations: BankingOperations[];
+  @Input() operationManagement: BankingOperations;
+  @Input() stringToSplit: string;
 
   constructor() { }
+
+
 
   ngOnInit() {
   }

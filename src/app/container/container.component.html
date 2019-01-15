@@ -2,12 +2,15 @@
     <div class="ui-g-6">
         <app-scrollable-menu 
             [bankingOperations]="bankingOperations" 
-            [positive]="positive">
+            [positive]="positive"
+            (valueChange)='displayCounter($event)'>
         </app-scrollable-menu>
     </div>
     <div class="ui-g-6">
         <app-bank-transaction-handling
-            [bankingOperations]="bankingOperations">
+            [bankingOperations]="bankingOperations"
+            [stringToSplit]="stringToSplit"
+            [operationManagement]="operationManagement">
         </app-bank-transaction-handling>
     </div>
 </div>

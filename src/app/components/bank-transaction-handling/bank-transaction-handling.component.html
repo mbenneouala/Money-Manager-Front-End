@@ -1,3 +1,4 @@
-<p>
-  bank-transaction-handling works!
-</p>
+<div *ngIf="operationManagement" style="text-align: center">
+  <p>{{ operationManagement.bankingOperationLabel }}</p>
+  <p>{{ operationManagement.bankingOperationValue }}</p>
+</div>
