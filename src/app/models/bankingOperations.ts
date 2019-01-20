@@ -4,4 +4,3 @@ export interface BankingOperations {
     bankingOperationDate?: string;
     bankingOperationCategory?: string;
 }
-    

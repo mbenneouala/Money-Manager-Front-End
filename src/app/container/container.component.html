@@ -3,13 +3,13 @@
         <app-scrollable-menu 
             [bankingOperations]="bankingOperations" 
             [positive]="positive"
-            (valueChange)='displayCounter($event)'>
+            (valueChange)='HandleBankTransaction($event)'>
         </app-scrollable-menu>
     </div>
     <div class="ui-g-6">
         <app-bank-transaction-handling
             [bankingOperations]="bankingOperations"
-            [stringToSplit]="stringToSplit"
+            [bankTransactionToHandle]="bankTransactionToHandle"
             [operationManagement]="operationManagement">
         </app-bank-transaction-handling>
     </div>

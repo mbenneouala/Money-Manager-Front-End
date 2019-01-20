@@ -1,4 +1,5 @@
 <div *ngIf="operationManagement" style="text-align: center">
+  <p style="font-size: 30px; font-weight: bolder">{{ operationManagement.bankingOperationValue }} €</p>
   <p>{{ operationManagement.bankingOperationLabel }}</p>
-  <p>{{ operationManagement.bankingOperationValue }}</p>
+  <p style="color:gray">Débité le : {{ operationManagement.bankingOperationDate }} <b>| Compte courant</b></p>
 </div>

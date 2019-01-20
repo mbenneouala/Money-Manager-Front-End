@@ -21,24 +21,29 @@ export class ContainerComponent implements OnInit {
   public bankingOperations: BankingOperations[];
   public bankTransactions$: Observable<BankingOperations[]> = this.apiBankingOperationsService.getBankingOperations();
   public positive: boolean;
-  public stringToSplit: string;
+  public bankTransactionToHandle: string;
   public operationManagement: BankingOperations;
+  public bankTransactionLabel: string;
 
   constructor(private apiBankingOperationsService: ApiBankingOperationsService) { }
 
-  displayCounter(stringToSplit) {
-    this.stringToSplit = stringToSplit;
-    const lastSpaceCharacter = this.stringToSplit.split(' ');
+  HandleBankTransaction(banktransaction: string) {
+    this.bankTransactionToHandle = banktransaction;
+    /* Split the bank transaction to get label, value & date separatly */
+    const lastSpaceCharacter = this.bankTransactionToHandle.split(' ');
+    /* Get first element of the bank transaction (operation type: CB, virmt, ...) */
+    this.bankTransactionLabel = lastSpaceCharacter[0];
+    /* Get bank transaction LABEL */
+    for (let _i = 1; _i < (lastSpaceCharacter.length) - 2; _i++) {
+      this.bankTransactionLabel = this.bankTransactionLabel + ' ' + lastSpaceCharacter[_i];
+    }
+    /* Current bank transaction to handle, displayed on click */
     const currentOperation: BankingOperations = {
       bankingOperationValue: lastSpaceCharacter[(lastSpaceCharacter.length) - 1],
-      bankingOperationLabel: lastSpaceCharacter[(lastSpaceCharacter.length) - 1]
+      bankingOperationDate: lastSpaceCharacter[(lastSpaceCharacter.length) - 2],
+      bankingOperationLabel: this.bankTransactionLabel
     };
     this.operationManagement = currentOperation;
-
-    // this.operationManagement.bankingOperationValue = lastSpaceCharacter[(lastSpaceCharacter.length) - 1];
-    // this.operationManagement.bankingOperationLabel = lastSpaceCharacter[(lastSpaceCharacter.length) - 1];
-    // this.operationManagement.bankingOperationDate = lastSpaceCharacter[(lastSpaceCharacter.length) - 2];
-    // this.operationManagement.bankingOperationCategory = lastSpaceCharacter[0];
   }
 
   /**
@@ -56,12 +61,12 @@ export class ContainerComponent implements OnInit {
   setBankTransactionColor() {
     this.apiBankingOperationsService.getBankingOperations().subscribe(data => {
       for (let i = 0; i < data.length; i++) {
-        if (+data[i].bankingOperationValue < 0) {
+        if (Number(data[i].bankingOperationValue) < 0) {
           this.positive = false;
-          // console.log(this.positive, +data[i].bankingOperationValue);
+          console.log(this.positive, Number(data[i].bankingOperationValue));
         } else {
           this.positive = true;
-          // console.log(this.positive, +data[i].bankingOperationValue);
+          console.log(this.positive, Number(data[i].bankingOperationValue));
         }
       }
     });

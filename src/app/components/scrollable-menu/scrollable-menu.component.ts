@@ -14,10 +14,8 @@ export class ScrollableMenuComponent implements OnInit {
    */
   @Input() bankingOperations: BankingOperations[];
   @Input() positive: boolean;
-  stringToSplit: string;
-
+  bankTransactionToHandle: string;
   @Output() valueChange = new EventEmitter();
-  counter = 0;
 
 
   /**
@@ -25,15 +23,9 @@ export class ScrollableMenuComponent implements OnInit {
    */
   constructor(private apiBankingOperationsService: ApiBankingOperationsService) { }
 
-  printToto(event) {
-    this.stringToSplit = event.srcElement.innerText.split('');
-    console.log(this.stringToSplit[this.stringToSplit.length - 2]);
-  }
-
-  valueChanged(event) { // You can give any function name
-    this.stringToSplit = event.srcElement.innerText;
-    console.log('child', this.stringToSplit);
-    this.valueChange.emit(this.stringToSplit);
+  valueChanged(pBankTransactionToHandle: any) {
+    this.bankTransactionToHandle = pBankTransactionToHandle.srcElement.innerText;
+    this.valueChange.emit(this.bankTransactionToHandle);
 }
 
   ngOnInit() {

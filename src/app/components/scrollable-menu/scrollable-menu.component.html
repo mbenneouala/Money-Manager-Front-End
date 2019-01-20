@@ -3,7 +3,7 @@
     <!-- <a href="#" class="active">Bank transactions</a> -->
     <div *ngFor="let operation of bankingOperations">
       <a (click)="valueChanged($event)" href="#">{{ operation.bankingOperationLabel }} 
-        <b style="float:right" [ngClass]="positive ? 'positive-value': 'negative-value'">{{ operation.bankingOperationValue }}</b>
+        <b style="float:right" [ngClass]="positive ? 'positive-value' : 'negative-value'">{{ operation.bankingOperationValue }}</b>
       </a>
     </div>
   </div>
