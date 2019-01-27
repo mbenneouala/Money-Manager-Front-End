@@ -1,14 +1,14 @@
 <div class="ui-g">
-    <div class="ui-g-6">
+    <div class="ui-g-4">
         <app-scrollable-menu 
             [bankingOperations]="bankingOperations" 
             [positive]="positive"
             (valueChange)='HandleBankTransaction($event)'>
         </app-scrollable-menu>
     </div>
-    <div class="ui-g-6">
+    <div class="ui-g-8" style="background-color: rgba(183, 196, 211, 0.64); margin-top: 10px; margin-bottom: 6px;">
         <app-bank-transaction-handling
-            [bankingOperations]="bankingOperations"
+            [bankingOperations]="bankingOperations" 
             [bankTransactionToHandle]="bankTransactionToHandle"
             [operationManagement]="operationManagement">
         </app-bank-transaction-handling>
