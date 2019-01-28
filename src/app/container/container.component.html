@@ -3,6 +3,7 @@
         <app-scrollable-menu 
             [bankingOperations]="bankingOperations" 
             [positive]="positive"
+            [bankTransactionsFromStore$]="bankTransactionsFromStore$"
             (valueChange)='HandleBankTransaction($event)'>
         </app-scrollable-menu>
     </div>
@@ -12,5 +13,8 @@
             [bankTransactionToHandle]="bankTransactionToHandle"
             [operationManagement]="operationManagement">
         </app-bank-transaction-handling>
+        <div>
+            <h2>There is {{(bankTransactionsFromStore$|async).data.length}} bank transactions</h2>
+        </div>
     </div>
 </div>

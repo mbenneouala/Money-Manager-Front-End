@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { BankingOperations } from '../models/bankingOperations';
 import { ApiBankingOperationsService } from '../api-banking-operations.service';
 import { Observable } from 'rxjs';
-
+import { StoreService } from '../store/store-service';
+import { BankTransactionState } from '../store/state/state';
 
 @Component({
   selector: 'app-container',
@@ -24,8 +25,12 @@ export class ContainerComponent implements OnInit {
   public bankTransactionToHandle: string;
   public operationManagement: BankingOperations;
   public bankTransactionLabel: string;
+  bankTransactionsFromStore$: Observable<BankTransactionState>;
+  // public bankTransactionsFromStore$: Observable<BankTransactionState> = this.storeService.readBankTransactions();
 
-  constructor(private apiBankingOperationsService: ApiBankingOperationsService) { }
+  constructor(
+    private apiBankingOperationsService: ApiBankingOperationsService,
+    private storeService: StoreService) { }
 
   HandleBankTransaction(banktransaction: string) {
     this.bankTransactionToHandle = banktransaction;
@@ -63,10 +68,10 @@ export class ContainerComponent implements OnInit {
       for (let i = 0; i < data.length; i++) {
         if (Number(data[i].bankingOperationValue) < 0) {
           this.positive = false;
-          console.log(this.positive, Number(data[i].bankingOperationValue));
+          // console.log(this.positive, Number(data[i].bankingOperationValue));
         } else {
           this.positive = true;
-          console.log(this.positive, Number(data[i].bankingOperationValue));
+          // console.log(this.positive, Number(data[i].bankingOperationValue));
         }
       }
     });
@@ -75,5 +80,11 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
     this.getBankingOperations();
     this.setBankTransactionColor();
+
+    /* Get data from REST API (with ngrx/effects) */
+    this.bankTransactionsFromStore$ = this.storeService.getBankTransactions();
+
+    /* Read data from store */
+    this.storeService.readBankTransactions();
   }
 }

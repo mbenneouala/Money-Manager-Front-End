@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BankingOperations } from 'src/app/models/bankingOperations';
 import { ApiBankingOperationsService } from 'src/app/api-banking-operations.service';
+import { Observable } from 'rxjs';
+import { BankTransactionState } from 'src/app/store/state/state';
 
 @Component({
   selector: 'app-scrollable-menu',
@@ -13,21 +15,23 @@ export class ScrollableMenuComponent implements OnInit {
    * Attributes
    */
   @Input() bankingOperations: BankingOperations[];
+  @Input() bankTransactionsFromStore$: Observable<BankTransactionState>;
   @Input() positive: boolean;
-  bankTransactionToHandle: string;
   @Output() valueChange = new EventEmitter();
 
+  public bankTransactionToHandle: string;
 
   /**
    * Constructor
    */
-  constructor(private apiBankingOperationsService: ApiBankingOperationsService) { }
+  constructor() { }
 
   valueChanged(pBankTransactionToHandle: any) {
     this.bankTransactionToHandle = pBankTransactionToHandle.srcElement.innerText;
     this.valueChange.emit(this.bankTransactionToHandle);
-}
+  }
 
   ngOnInit() {
+
   }
 }

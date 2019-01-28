@@ -18,9 +18,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
 
 // PrimeNG
-import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
-import {MenuItem} from 'primeng/api';                  //api
-import {TableModule} from 'primeng/table';             //Turbo table
+import {AccordionModule} from 'primeng/accordion';     // accordion and accordion tab
+import {MenuItem} from 'primeng/api';                  // api
+import {TableModule} from 'primeng/table';             // Turbo table
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ButtonModule} from 'primeng/button';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
@@ -42,7 +42,13 @@ import { TableOfBankTransactionsComponent } from './components/table-of-bank-tra
 import { ScrollableMenuComponent } from './components/scrollable-menu/scrollable-menu.component';
 import { TransactionCategorisationComponent } from './components/transaction-categorisation/transaction-categorisation.component';
 import { BankTransactionHandlingComponent } from './components/bank-transaction-handling/bank-transaction-handling.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/state/state';
+import { EffectsModule } from '@ngrx/effects';
+import { Effects } from './store/effects/effects';
 
+
+export const effects: any[] = [Effects];
 
 @NgModule({
   declarations: [
@@ -82,7 +88,16 @@ import { BankTransactionHandlingComponent } from './components/bank-transaction-
     MessageModule,
     TooltipModule,
     FieldsetModule,
-    SliderModule
+    SliderModule,
+
+    /* ngrx/store */
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('elements', reducers),
+
+    /* */
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature(effects)
+
   ],
 
   schemas: [
@@ -92,3 +107,4 @@ import { BankTransactionHandlingComponent } from './components/bank-transaction-
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
